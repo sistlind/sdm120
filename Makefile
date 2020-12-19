@@ -8,3 +8,5 @@ OBJ = sdm120.c
 
 sdm120: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+install: 
+	cp sdm120 /usr/local/bin/sdm120

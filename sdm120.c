@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
     int wcount = 0;
 
 
-    int fd = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NDELAY);
+    int fd = open(ttydev, O_RDWR | O_NOCTTY | O_NDELAY);
  
     if (fd == -1) {
         perror(argv[2]);
@@ -134,8 +134,6 @@ int main(int argc, char* argv[]) {
 	close(fd);
 
 	if (sqlmode==1) {
-		output_colnames[strlen(output_colnames)-1]=0;
-		output_colnames[strlen(output_colnames)-1]=0;
 		printf("(%s)\nVALUES\n(%s);\n",output_colnames,output_values);
 	}
 }
