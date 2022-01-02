@@ -14,7 +14,7 @@
 int main(int argc, char* argv[]) {
     int debug = 0;
 	char sqlmode =0;
-    char ttydev[16] = "/dev/ttyUSB0";
+    char ttydev[] = "/dev/modbus_dongle";
 	char output_colnames[250]="";//for sqloutput
 	char output_values[250]="";//for sqloutput
 
@@ -58,8 +58,8 @@ int main(int argc, char* argv[]) {
     serial.c_lflag = 0;
     serial.c_cflag = 0;
  
-    serial.c_cc[VMIN] = 0;
-    serial.c_cc[VTIME] = 10;
+    serial.c_cc[VMIN] = 10;
+    serial.c_cc[VTIME] = 1;
  
     serial.c_cflag = B2400| CS8 |CREAD|CLOCAL;//8Bits, parity none
     fcntl(fd,F_SETFL,0);
