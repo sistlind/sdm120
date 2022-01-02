@@ -1,13 +1,14 @@
 #!/bin/sh
 #called by /etc/crontab all 15min
 logger "Getting data from sdm120 and save to db"
-tmpfile=/etc/sdm120/sdm120.tmp.sql
+tmpfile=/tmpram/sdm120.tmp.sql
 
 if [ -f $tmpfile ]; then
 	rm $tmpfile
 fi
-
-sdm120 -sql /dev/modbus_dongle > $tmpfile
+#flush input:
+tail /dev/modbus_dongle>/dev/null
+sdm120.py -sql /dev/modbus_dongle > $tmpfile
 
 if [ -f $tmpfile ]; then
 	sed -i '1iINSERT INTO sdm120\n' $tmpfile
